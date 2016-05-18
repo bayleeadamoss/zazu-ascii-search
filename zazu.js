@@ -12,7 +12,8 @@ module.exports = {
         id: 1,
         type: 'PrefixScript',
         prefix: 'asc',
-        space: 'Required',
+        space: true,
+        args: 'Required',
         script: 'node ascii_search.js {query}',
         connections: [2]
       },
