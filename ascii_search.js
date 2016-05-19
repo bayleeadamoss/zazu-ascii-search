@@ -15,10 +15,10 @@ var symbols = _.reduce(symbols_raw, function(memo, value, key) {
       return _.inRange(this.key, 0, 9) || _.inRange(this.key, 11, 32);
     },
     "display": function() {
-      if (this.illegal_char(this.key)) {
+      if (this.illegal_char()) {
         return this.key + " - " + this.value
       } else {
-        return this.key + " &##" + this.key + ";"
+        return this.key + " &#" + this.key + ";"
       }
     },
     "to_zazu_obj": function() {
