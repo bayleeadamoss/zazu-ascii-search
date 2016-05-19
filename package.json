@@ -1,0 +1,14 @@
+{
+  "name": "ascii-search",
+  "version": "1.0.0",
+  "description": "Search for ASCII characters by name or by number.",
+  "main": "ascii_search.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "TinyTacoTeam",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.12.0"
+  }
+}

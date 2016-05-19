@@ -1,7 +1,7 @@
 module.exports = {
   name: 'ascii-search',
   version: '0.0.1',
-  author: 'afaur',
+  author: 'TinyTacoTeam',
   description: 'Search for ASCII characters by name or by number.',
   icon: 'icon.png',
   homepage: 'https://github.com/tinytacoteam/ascii-search',
