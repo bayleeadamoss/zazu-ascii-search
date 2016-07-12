@@ -1,54 +1,45 @@
-const argument = process.argv.slice(-1)[0]
+const query = new RegExp(process.argv.slice(-1)[0], 'i')
+const symbolsRaw = require('./symbols.json')
 
-const _ = require('lodash');
-
-const symbols_raw = require('./symbols.json')
-
-var symbols = _.reduce(symbols_raw, function(memo, value, key) {
-  (memo['items'] || (memo['items'] = [])).push({
-    "key": key,
-    "value": value,
-    "match": function(regex) {
-      return this.key.match(regex) || this.value.match(regex);
+const symbols = Object.keys(symbolsRaw).map((key) => {
+  const self = {
+    key: key,
+    value: symbolsRaw[key],
+    match: (regex) => {
+      return self.key.match(regex) || self.value.match(regex)
     },
-    "illegal_char": function() {
-      return _.inRange(this.key, 0, 9) || _.inRange(this.key, 11, 32);
+    illegalChar: () => {
+      if (self.key >= 0 && self.key <= 9) return true
+      if (self.key >= 11 && self.key <= 32) return true
+      return false
     },
-    "display": function() {
-      if (this.illegal_char()) {
-        return this.key + " - " + this.value
-      } else {
-        return this.key + " &#" + this.key + ";"
+    display: () => {
+      if (self.illegalChar()) {
+        return self.key + " - " + self.value
       }
+      return self.key + " &#" + self.key + ";"
     },
-    "to_zazu_obj": function() {
+    toZazuObj: () => {
       return {
-        title: this.display(),
-        subtitle: this.value,
-        value: this.key,
-      };
+        id: self.key,
+        title: self.display(),
+        subtitle: self.value,
+        value: self.key,
+      }
     }
-  });
-  return memo;
-}, {});
+  }
+  return self
+})
 
-try {
-  var results = _.map(symbols['items'], function(item){
-    return item.to_zazu_obj();
-  });
+const results = symbols.reduce((memo, item) => {
+  if (item.match(query)) {
+    memo.push(item.toZazuObj())
+  }
+  return memo
+}, [])
 
-  console.log(
-    JSON.stringify(
-      results
-    )
+console.log(
+  JSON.stringify(
+    results
   )
-} catch (e) {
-  console.log(JSON.stringify([
-    {
-      title: '...',
-      subtitle: 'No results found.',
-      value: -1,
-    },
-  ]))
-}
-
+)
