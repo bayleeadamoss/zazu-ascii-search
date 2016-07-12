@@ -1,11 +1,11 @@
 module.exports = {
-  name: 'ascii-search',
+  name: 'zazu-ascii-search',
   version: '0.0.1',
   author: 'TinyTacoTeam',
   description: 'Search for ASCII characters by name or by number.',
   icon: 'icon.png',
-  homepage: 'https://github.com/tinytacoteam/ascii-search',
-  git: 'git@github.com:tinytacoteam/ascii-search.git',
+  homepage: 'https://github.com/tinytacoteam/zazu-ascii-search',
+  git: 'git@github.com:tinytacoteam/zazu-ascii-search.git',
   blocks: {
     input: [
       {
