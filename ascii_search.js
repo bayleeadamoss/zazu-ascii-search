@@ -1,8 +1,7 @@
-
 module.exports = (pluginContext) => {
-  const symbolsRaw = require('./symbols.json')
-  const symbols = Object.keys(symbolsRaw).map((key) => {
-    const self = {
+  let symbolsRaw = require('./symbols')
+  let symbols = Object.keys(symbolsRaw).map((key) => {
+    let self = {
       key: key,
       value: symbolsRaw[key],
       match: (regex) => {
@@ -24,30 +23,25 @@ module.exports = (pluginContext) => {
           id: self.key,
           title: self.display(),
           subtitle: self.value,
-          value: self.key,
+          value: String.fromCharCode(self.key),
         }
       }
     }
     return self
   })
-  return {
-    respondsTo: (query) => {
-      return query.length >= 2
-    },
-    search: (query, env = {}) => {
-      const rquery = new RegExp(query, 'i')
+  return (query) => {
+    let rquery = new RegExp(query, 'i')
 
-      return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
 
-        const results = symbols.reduce((memo, item) => {
-          if (item.match(rquery)) {
-            memo.push(item.toZazuObj())
-          }
-          return memo
-        }, [])
+      let results = symbols.reduce((memo, item) => {
+        if (item.match(rquery)) {
+          memo.push(item.toZazuObj())
+        }
+        return memo
+      }, [])
 
-        resolve(results)
-      })
-    },
+      resolve(results)
+    })
   }
 }
