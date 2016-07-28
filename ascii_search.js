@@ -4,6 +4,7 @@ module.exports = (pluginContext) => {
     let self = {
       key: key,
       value: symbolsRaw[key],
+      character: String.fromCharCode(key),
       match: (regex) => {
         return self.key.match(regex) || self.value.match(regex)
       },
@@ -16,14 +17,14 @@ module.exports = (pluginContext) => {
         if (self.illegalChar()) {
           return self.key + " - " + self.value
         }
-        return self.key + " &#" + self.key + ";"
+        return self.key + " " + self.character
       },
       toZazuObj: () => {
         return {
           id: self.key,
           title: self.display(),
           subtitle: self.value,
-          value: String.fromCharCode(self.key),
+          value: self.character,
         }
       }
     }
