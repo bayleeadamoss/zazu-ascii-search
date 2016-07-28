@@ -6,18 +6,18 @@ module.exports = {
   blocks: {
     input: [
       {
-        id: 1,
+        id: 'input',
         type: 'PrefixScript',
-        prefix: 'asc',
         space: true,
         args: 'Required',
-        script: 'node ascii_search.js {query}',
-        connections: [2]
+        prefix: 'asc',
+        script: 'ascii_search.js',
+        connections: ['copy'],
       },
     ],
     output: [
       {
-        id: 2,
+        id: 'copy',
         type: 'CopyToClipboard',
         text: '{value}',
       },
