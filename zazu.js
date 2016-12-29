@@ -1,3 +1,4 @@
+// Deprecated use zazu.json instead
 module.exports = {
   name: 'zazu-ascii-search',
   version: '0.0.1',
