@@ -9,7 +9,7 @@ Add `tinytacoteam/zazu-ascii-calculator` inside of `plugins` block of your  `~/.
 ~~~ javascript
 {
   "plugins": [
-    "tinytacoteam/zazu-ascii-calculator"
+    "tinytacoteam/zazu-ascii-search"
   ]
 }
 ~~~
