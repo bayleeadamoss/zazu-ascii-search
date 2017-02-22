@@ -31,12 +31,16 @@ module.exports = (pluginContext) => {
     return self
   })
   return (query) => {
-    let rquery = new RegExp(query, 'i')
+    let words = query.split(' ');
 
     return new Promise((resolve, reject) => {
 
       let results = symbols.reduce((memo, item) => {
-        if (item.match(rquery)) {
+        var match = true;
+        for (var i = 0, len = words.length; i < len && match; i++) {
+           match = item.match(new RegExp("\\b"+words[i], 'i'));
+        }
+        if (match) {
           memo.push(item.toZazuObj())
         }
         return memo
